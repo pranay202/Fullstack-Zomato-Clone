@@ -34,7 +34,7 @@ Router.post("/signup", async (req, res) => {
         await UserModel.create({
             ...req.body.credentials,
             password: hashedPassword,
-        })
+        });
         //JWT Auth Token
         const token = jwt.sign({user: {fullname, email}}, "ZomatoApp");
 
@@ -43,4 +43,6 @@ Router.post("/signup", async (req, res) => {
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }
-})
+});
+
+module.exports = Router;
