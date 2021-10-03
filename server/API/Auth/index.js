@@ -1,5 +1,7 @@
 import express from "express";
-import bcrypt from "bcrypt";
+// import bcrypt from "bcrypt";
+
+const jwt = require('jsonwebtoken');
 
 import { UserModel } from "../../Database/allModels";
 
@@ -15,28 +17,24 @@ Method              POST
 
 Router.post("/signup", async (req, res) => {
     try {
-        const { fullname, email, password, phoneNumber } = req.body.credentials;
+        // const {  email, phoneNumber } = req.body.credentials;
 
-        // check whether email or phoneNumber exists or not
-        const checkUserByEmail = await UserModel.findOne({ email });
-        const checkUserByPhone = await UserModel.findOne({ phoneNumber });
-
-        if (checkUserByEmail || checkUserByPhone) {
-            return res.json({error: "User already Exists!"});
-        }
+        // used statics in User model so we are using methods here to access it.
+        await UserModel.findEmailAndPhone(req.body.credentials);
 
         //hashing and salting
-        const bcryptSalt = await bcrypt.genSalt(8);
+        // const bcryptSalt = await bcrypt.genSalt(8);
 
-        const hashedPassword = await bcrypt.hash(password, bcryptSalt);
+        // const hashedPassword = await bcrypt.hash(password, bcryptSalt);
 
-        //DB
-        await UserModel.create({
-            ...req.body.credentials,
-            password: hashedPassword,
-        });
+        //DB ::::: Here below if we have to destructure things we need curly braces
+        const newUser = await UserModel.create(
+            req.body.credentials,
+            // password: hashedPassword,
+        );
         //JWT Auth Token
-        const token = jwt.sign({user: {fullname, email}}, "ZomatoApp");
+        const token = newUser.generateJwtToken();
+        // const token = jwt.sign({user: {fullname, email}}, "ZomatoApp");
 
         return res.status(200).json({ token });
 
