@@ -17,6 +17,7 @@ UserSchema.methods.generateJwtToken = function () {
     return jwt.sign({user: this._id.toString()}, "ZomatoApp");
 };
 
+// For user sign up
 UserSchema.statics.findEmailAndPhone = async ({email, phoneNumber}) => {
     //check whether the email exists
     const checkUserByEmail = await UserModel.findOne({email});
@@ -29,6 +30,23 @@ UserSchema.statics.findEmailAndPhone = async ({email, phoneNumber}) => {
         throw new Error("User already Exist!");
     }
     return false;
+};
+
+// For user Sign In
+UserSchema.statics.findByEmailAndPassword = async ({ email, password }) => {
+    //check whether the email exists
+    const user = await UserModel.findOne({email});
+    //if email does not exits 
+    if(!user) throw new Error("User does not Exist!");
+
+    //check whether the password matches or not .. simply compare
+    const doesPasswordMatch = await bcrypt.compare(password, user.password)
+
+    // if user already exists,
+    if (!doesPasswordMatch) {
+        throw new Error("Invalid Password!");
+    }
+    return user;
 };
 
 UserSchema.pre("save", function(next) {

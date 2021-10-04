@@ -21,6 +21,7 @@ Router.post("/signup", async (req, res) => {
 
         // used statics in User model so we are using methods here to access it.
         await UserModel.findEmailAndPhone(req.body.credentials);
+        
 
         //hashing and salting
         // const bcryptSalt = await bcrypt.genSalt(8);
@@ -37,6 +38,34 @@ Router.post("/signup", async (req, res) => {
         // const token = jwt.sign({user: {fullname, email}}, "ZomatoApp");
 
         return res.status(200).json({ token });
+
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+});
+
+
+/* 
+Route               /Signin
+Description         Signin with email and password
+Params              None
+Access              Public
+Method              POST
+*/
+
+Router.post("/signin", async (req, res) => {
+    try {
+        // const {  email, phoneNumber } = req.body.credentials;
+        // does user exixts
+        const user = await UserModel.findByEmailAndPassword(
+            req.body.credentials
+        );
+        
+        //JWT Auth Token
+        const token = user.generateJwtToken();
+        // const token = jwt.sign({user: {fullname, email}}, "ZomatoApp");
+
+        return res.status(200).json({ token, status: "Success" });
 
     } catch (error) {
         return res.status(500).json({ error: error.message });
