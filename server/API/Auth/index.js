@@ -1,4 +1,5 @@
 import express from "express";
+import passport from "passport";
 // import bcrypt from "bcrypt";
 
 const jwt = require('jsonwebtoken');
@@ -59,17 +60,45 @@ Router.post("/signin", async (req, res) => {
         // does user exixts
         const user = await UserModel.findByEmailAndPassword(
             req.body.credentials
-        );
-        
-        //JWT Auth Token
-        const token = user.generateJwtToken();
-        // const token = jwt.sign({user: {fullname, email}}, "ZomatoApp");
+            );
+            
+            //JWT Auth Token
+            const token = user.generateJwtToken();
+            // const token = jwt.sign({user: {fullname, email}}, "ZomatoApp");
+            
+            return res.status(200).json({ token, status: "Success" });
+            
+        } catch (error) {
+            return res.status(500).json({ error: error.message });
+        }
+    });
+    
+    /* 
+    Route               /google
+    Description         Google Signin
+    Params              None
+    Access              Public
+    Method              GET
+    */
 
-        return res.status(200).json({ token, status: "Success" });
+    Router.get("/google", passport.authenticate("google", {
+        scope: [
+            "https://www.googleapis.com/auth/userinfo.profile",
+            "https://www.googleapis.com/auth/userinfo.email",
+        ],
+    }))
 
-    } catch (error) {
-        return res.status(500).json({ error: error.message });
-    }
-});
 
+    /* 
+    Route               /google/callback
+    Description         Google Signin callback for redirecting to Main page
+    Params              None
+    Access              Public
+    Method              GET
+    */
+
+    Router.get("/google", passport.authenticate("google", {failureRedirect: "/"}),
+    (req, res) => {
+        return res.json({token: req.session.passport.user.token});
+    });
 module.exports = Router;
