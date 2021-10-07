@@ -5,6 +5,9 @@ import multer from 'multer';
 //Database Model
 import { ImageModel } from "../../Database/allModels";
 
+//Utilities
+import {s3Upload} from "../../Utils/AWS/s3";
+
 const Router = express.Router();
 
 //config multer
@@ -49,7 +52,7 @@ Router.post("/", async (req, res) => {
         //     })
         // };
         
-        // const uploadImage = await s3Upload(bucketOptions);
+        const uploadImage = await s3Upload(bucketOptions);
 
     } catch (error) {
         return res.status(500).json({ error: error.message });
