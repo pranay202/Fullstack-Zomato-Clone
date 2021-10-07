@@ -2,7 +2,7 @@ import express from "express";
 import passport from "passport";
 // import bcrypt from "bcrypt";
 
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 
 import { UserModel } from "../../Database/allModels";
 
@@ -81,12 +81,12 @@ Router.post("/signin", async (req, res) => {
     Method              GET
     */
 
-    Router.get("/google", passport.authenticate("google", {
-        scope: [
-            "https://www.googleapis.com/auth/userinfo.profile",
-            "https://www.googleapis.com/auth/userinfo.email",
-        ],
-    }))
+    // Router.get("/google", passport.authenticate("google", {
+    //     scope: [
+    //         "https://www.googleapis.com/auth/userinfo.profile",
+    //         "https://www.googleapis.com/auth/userinfo.email",
+    //     ],
+    // }))
 
 
     /* 
@@ -97,8 +97,8 @@ Router.post("/signin", async (req, res) => {
     Method              GET
     */
 
-    Router.get("/google", passport.authenticate("google", {failureRedirect: "/"}),
-    (req, res) => {
-        return res.json({token: req.session.passport.user.token});
-    });
+    // Router.get("/google", passport.authenticate("google", {failureRedirect: "/"}),
+    // (req, res) => {
+    //     return res.json({token: req.session.passport.user.token});
+    // });
 module.exports = Router;
