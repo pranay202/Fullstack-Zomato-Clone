@@ -1,8 +1,11 @@
 import AWS from "aws-sdk";
 
+const AWS_S3_ACCESS_KEY = "3rf344jtreghe";
+const AWS_S3_SECRET_KEY = "ef9egejgfe";
+
 const s3Bucket = new AWS.S3({
-    accessKeyId: process.env.AWS_S3_ACCESS_KEY,
-    secretAccessKey: process.env.AWS_S3_SECRET_KEY,
+    accessKeyId: AWS_S3_ACCESS_KEY,
+    secretAccessKey: AWS_S3_SECRET_KEY,
     region: "ap-south-1"
 });
 

@@ -16,7 +16,7 @@ export default (passport) => {
             //creating a new user by google auth
             const newUser = {
                 fullname: profile.displayName,
-                email: profile.email[0].value,
+                email: profile.emails[0].value,
                 profilePic: profile.photos[0].value,
             };
             try {
@@ -40,6 +40,11 @@ export default (passport) => {
         }
         )
     );
-    passport.serializeUser(userData, done) => done(null, {...userData});
-    passport.deserializeUser((id, done) => done(null, id));
+    passport.serializeUser(function(userData, done) {
+        done(null, {...userData});
+    }); 
+    passport.deserializeUser(function(id, done) {
+        done(null, id);
+    });
+
 }
