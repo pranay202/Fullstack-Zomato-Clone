@@ -1,10 +1,13 @@
 import express from "express";
 import passport from "passport";
-// import bcrypt from "bcrypt";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
-// const jwt = require('jsonwebtoken');
-
+//Database Model
 import { UserModel } from "../../Database/allModels";
+
+//Validations
+import { ValidateSignup, ValidateSignin } from "../../Validation/auth"
 
 const Router = express.Router();
 
@@ -18,6 +21,7 @@ Method              POST
 
 Router.post("/signup", async (req, res) => {
     try {
+        await ValidateSignup(req.body.credentials);
         // const {  email, phoneNumber } = req.body.credentials;
 
         // used statics in User model so we are using methods here to access it.
@@ -38,7 +42,7 @@ Router.post("/signup", async (req, res) => {
         const token = newUser.generateJwtToken();
         // const token = jwt.sign({user: {fullname, email}}, "ZomatoApp");
 
-        return res.status(200).json({ token });
+        return res.status(200).json({token});
 
     } catch (error) {
         return res.status(500).json({ error: error.message });
@@ -56,17 +60,16 @@ Method              POST
 
 Router.post("/signin", async (req, res) => {
     try {
+        await ValidateSignin(req.body.credentials);
         // const {  email, phoneNumber } = req.body.credentials;
         // does user exixts
-        const user = await UserModel.findByEmailAndPassword(
-            req.body.credentials
-            );
+        const user = await UserModel.findByEmailAndPassword(req.body.credentials);
             
             //JWT Auth Token
             const token = user.generateJwtToken();
             // const token = jwt.sign({user: {fullname, email}}, "ZomatoApp");
             
-            return res.status(200).json({ token, status: "Success" });
+            return res.status(200).json({token, status: "Success"});
             
         } catch (error) {
             return res.status(500).json({ error: error.message });
@@ -81,12 +84,13 @@ Router.post("/signin", async (req, res) => {
     Method              GET
     */
 
-    // Router.get("/google", passport.authenticate("google", {
-    //     scope: [
-    //         "https://www.googleapis.com/auth/userinfo.profile",
-    //         "https://www.googleapis.com/auth/userinfo.email",
-    //     ],
-    // }))
+    Router.get("/google", passport.authenticate("google", {
+        scope: [
+            "https://www.googleapis.com/auth/userinfo.profile",
+            "https://www.googleapis.com/auth/userinfo.email",
+        ],
+    })
+    );
 
 
     /* 
@@ -97,8 +101,10 @@ Router.post("/signin", async (req, res) => {
     Method              GET
     */
 
-    // Router.get("/google", passport.authenticate("google", {failureRedirect: "/"}),
-    // (req, res) => {
-    //     return res.json({token: req.session.passport.user.token});
-    // });
-module.exports = Router;
+    Router.get("/google/callback", passport.authenticate("google", {failureRedirect: "/"}),
+    (req, res) => {
+        return res.json({token: req.session.passport.user.token});
+    }
+    );
+
+export default Router;
