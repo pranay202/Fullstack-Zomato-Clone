@@ -43,7 +43,7 @@ Router.get("/:id", async (req, res) => {
         const restaurant = await RestaurantModel.findOne({ _id });
         if (!restaurant)
         return res.status(404).json({ error: "Restaurant not found" });
-        else
+        
         return res.json({ restaurant});
     } catch (error) {
         return res.status(500).json({ error: error.message });
@@ -64,10 +64,12 @@ Router.get("/search", async (req, res) => {
 
         const { searchString } = req.body;
 
-        const restaurant = await RestaurantModel.find({
+        const restaurants = await RestaurantModel.find({
             // regex is a substring which will searched in the names of restaurants
             name: {$regex: searchString, $options: "i"},
         });
+
+        return res.json({restaurants})
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }
