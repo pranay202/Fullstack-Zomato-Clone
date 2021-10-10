@@ -1,14 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
 
+//HOC
+import HomeLayoutHOC from './HOC/Home.HOC';
+
+//Component
+import { Temp } from './Components/temp';
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p className="text-red-700">Hello world</p>
-      </header>
-    </div>
+  <>
+    <HomeLayoutHOC path="/" exact component={Temp} />
+  </>
   );
 }
 
