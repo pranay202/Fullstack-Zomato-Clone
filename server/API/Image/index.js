@@ -30,13 +30,13 @@ Access              Public
 Method              POST
 */
 
-Router.post("/", async (req, res) => {
+Router.post("/", upload.single("file"), async (req, res) => {
     try {
         const file = req.file;
         
         //S3 Bucket Options
         const bucketOptions = {
-            Bucket: "",
+            Bucket: "zomatomaster2001",
             Key: file.originalname,
             Body: file.buffer,
             ContentType: file.mimetype,
@@ -54,6 +54,7 @@ Router.post("/", async (req, res) => {
         
         const uploadImage = await s3Upload(bucketOptions);
 
+        return res.status(200).json({ uploadImage });
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }
