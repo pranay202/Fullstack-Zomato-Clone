@@ -6,7 +6,7 @@ import { MdLocationOn, MdArrowDropDown } from "react-icons/md";
 const MobileNav = () => {
     return (
         <>
-        <div className="flex items-center justify-between w-full md:hidden">
+        <div className="flex items-center justify-between w-full lg:hidden">
             <div className="w-24 m-1">
                 <img 
                 src="https://b.zmtcdn.com/web_assets/b40b97e677bc7b2ca77c58c61db266fe1603954218.png"
@@ -65,10 +65,10 @@ const DesktopNav = () => {
 const Navbar = () => {
     return (
         <>
-        <nav className="px-5 py-2 flex bg-white shadow-md items-center md:hidden">
+        <nav className="px-5 py-2 flex bg-white shadow-md items-center lg:hidden">
             <MobileNav />
         </nav>
-        <nav className="mx-20 px-3 py-2 bg-white hidden md:block">
+        <nav className="mx-20 px-3 py-2 bg-white hidden md:hidden lg:flex">
             <DesktopNav />
         </nav>
         </>
