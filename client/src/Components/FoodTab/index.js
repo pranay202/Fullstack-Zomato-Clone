@@ -116,7 +116,7 @@ const MobileTab = () => {
     
         return (
             <>
-            <div className="hidden lg:flex gap-6 px-52 bg-white p-3 px top-5=0 mt-4 z-10 w-full items-center text-gray-500 border-b">  
+            <div className="hidden lg:flex gap-6 px-24 bg-white p-3 px top-5=0 mt-4 z-10 w-full items-center text-gray-500 border-b">  
             {
                 allTypes.map((items) => (
                   /* <div className={ items.isActive ? "flex flex-col relative items-center text-xl text-black border-t-4 border-zomato-400" : "flex flex-col relative items-center text-xl"}>
