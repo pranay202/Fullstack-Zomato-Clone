@@ -33,7 +33,7 @@ Access                Public
 Method                Delete
 */
 
-Router.post("/new", async (req, res) => {
+Router.delete("/new/:_id", async (req, res) => {
     try {
         const { _id } = req.params;
         await ReviewModel.findByIdAndDelete(_id);
