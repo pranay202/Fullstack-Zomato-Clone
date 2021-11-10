@@ -33,7 +33,7 @@ Access                    Public
 Method                    Get
 */
 
-Router.get("//image/:_id", async (req, res) => {
+Router.get("/image/:_id", async (req, res) => {
     try {
         const { _id } = req.params;
         const menus = await ImageModel.findOne(_id);
