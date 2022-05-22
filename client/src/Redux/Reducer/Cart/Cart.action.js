@@ -1,4 +1,4 @@
-import axios from "axios";
+// import axios from "axios";
 
 import { GET_CART, ADD_CART, DELETE_CART, INCREMENT_OTY, DECREMENT_OTY} from "./Cart.type";
 

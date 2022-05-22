@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 //components
 import DeliveryCarousal from './DeliveryCorousal'
 import Brand from './Brand';
-// import RestaurantCard from '../RestaurantCard';
+import RestaurantCard from '../RestaurantCard';
 
 const Delivery = () => {
     const [restaurantList, setRestaurantList] = useState([]);
@@ -20,12 +20,12 @@ const Delivery = () => {
         <>
         <DeliveryCarousal/>
         <Brand />
-        {/* <div className="text-gray-800 font-semibold text-2xl my-5">Delivery Restaurants Near Your Presence</div>
+        <div className="text-gray-800 font-semibold text-2xl my-5">Delivery Restaurants Near Your Presence</div>
         <div className="flex justify-between flex-wrap">
             {restaurantList.map((restaurant) => (
                 <RestaurantCard {...restaurant} key={restaurant._id}/>
             ))}
-        </div> */}
+        </div>
         </>
     );
 };

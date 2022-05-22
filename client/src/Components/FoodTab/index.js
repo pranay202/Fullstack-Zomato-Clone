@@ -6,6 +6,7 @@ import { BsHandbag } from "react-icons/bs";
 import { GiFootsteps, GiWineBottle } from "react-icons/gi";
 import { BiCoffeeTogo } from "react-icons/bi";
 import { MdOutlineDeliveryDining } from "react-icons/md";
+import { RiMedicineBottleLine } from "react-icons/ri";
 
 const MobileTab = () => {
     
@@ -96,6 +97,12 @@ const MobileTab = () => {
                 id: `night`,
                 icon: <GiWineBottle />,
                 name: 'Nightlife',
+                isActive: false
+            },
+            {
+                id: `nutrition`,
+                icon: <RiMedicineBottleLine />,
+                name: 'Nutrition',
                 isActive: false
             }
         ]);

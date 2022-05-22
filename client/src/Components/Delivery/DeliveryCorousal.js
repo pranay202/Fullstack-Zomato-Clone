@@ -81,7 +81,7 @@ const DeliveryLg = () => {
     return(
         <>
         <div className="py-6 px-24 w-6/5">
-           <h1 className="text-3xl text-gray-800 font p-4 px-0 py-6">Inspiration for your first order</h1>
+           <h1 className="text-3xl text-gray-800 p-4 px-0 py-6">Inspiration for your first order</h1>
            <div>
            <Slider {...settings}>
                    {categories.map((food) => (

@@ -101,8 +101,7 @@ Router.post("/signin", async (req, res) => {
     Method              GET
     */
 
-    Router.get("/google/callback", passport.authenticate("google", {failureRedirect: "/"}),
-    (req, res) => {
+    Router.get("/google/callback", passport.authenticate("google", {failureRedirect: "/"}),(req, res) => {
         return res.json({token: req.session.passport.user.token});
     }
     );

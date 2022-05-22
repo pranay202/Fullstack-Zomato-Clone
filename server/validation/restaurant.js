@@ -19,3 +19,11 @@ export const ValidateRestaurantSearchString = (restaurantObj) => {
     return Schema.validateAsync(restaurantObj);
 
 };
+
+export const ValidateRestaurantId = (restaurantObj) => {
+    const Schema = joi.object({
+      _id: joi.string().required(),
+    });
+  
+    return Schema.validateAsync(restaurantObj);
+};

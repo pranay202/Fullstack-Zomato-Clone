@@ -18,6 +18,7 @@ import Menu from "./API/Menu";
 import Image from "./API/Image";
 import Order from "./API/Order";
 import Review from "./API/Review";
+import MailService from "./API/Mail";
 
 //Database connection
 import ConnectDB from "./Database/connection.js";
@@ -44,6 +45,7 @@ zomato.use("/menu", Menu);
 zomato.use("/image", Image);
 zomato.use("/order", Order);
 zomato.use("/reviews", Review);
+zomato.use("/mail", MailService);
 
 
 zomato.get('/',(req,res) => {

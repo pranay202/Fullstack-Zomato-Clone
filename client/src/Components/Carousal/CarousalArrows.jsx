@@ -67,3 +67,54 @@ export const NextArrowB = (props) => {
     </>
   );
 };
+
+export const PrevArrowD = (props) => {
+  return (
+    <>
+      <div
+      className="border-2 border-red-100 shadow-lg"
+        style={{
+          ...props.style,
+          fontSize: "20px", display: 'block', left:"-15px", top: "150px",zIndex:"15", height:"30px", width:"30px", opacity:"0.9", color:"black", backgroundColor:"white", position:"absolute", borderRadius: "50%", padding:"5px", paddingTop:"3px", paddingLeft:"3px"
+        }}
+        onClick={props.onClick}
+      >
+      <span className="icon IoIosArrowBack"><IoIosArrowBack/></span>
+      </div>
+    </>
+  );
+};
+
+export const NextArrowD = (props) => {
+  return (
+    <>
+      <div
+         className="border-2 border-red-100 shadow-lg"
+        style={{
+          ...props.style,
+          fontSize: "20px", display: 'block', right:"0px", top: "150px",zIndex:"15", height:"30px", width:"30px", opacity:"0.9", color:"black", backgroundColor:"white", position:"absolute", borderRadius: "50%", padding:"5px", paddingTop:"3px", paddingLeft:"3px"
+        }}
+        onClick={props.onClick}
+      >
+      <span className="icon IoIosArrowForward"><IoIosArrowForward/></span>
+      </div>
+    </>
+  );
+};
+
+export const NextArrowN = (props) => {
+  return (
+    <>
+      <div
+         className="border-2 border-red-100 shadow-lg"
+        style={{
+          ...props.style,
+          fontSize: "20px", display: 'block', right:"-15px", top: "150px",zIndex:"15", height:"30px", width:"30px", opacity:"0.9", color:"black", backgroundColor:"white", position:"absolute", borderRadius: "50%", padding:"5px", paddingTop:"3px", paddingLeft:"3px"
+        }}
+        onClick={props.onClick}
+      >
+      <span className="icon IoIosArrowForward"><IoIosArrowForward/></span>
+      </div>
+    </>
+  );
+};
